@@ -1,1 +1,2 @@
-@import '../../theme/semantic/semantic.css'
+@import '../../theme/semantic/semantic.css';
+#wrap{min-width:1024px;min-height:768px}
