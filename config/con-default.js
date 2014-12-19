@@ -3,6 +3,7 @@ define([], function () {
 			baseUrl : './',
 			paths : {
 				jquery : '/lib/jquery-1.11.0',
+				zepto : '/lib/zepto-1.1.6',
 				backbone : '/lib/backbone-1.1.2',
 				underscore : '/lib/underscore-1.6.0',
 				handlebars : '/gallery/handlebars-1.3.0',
