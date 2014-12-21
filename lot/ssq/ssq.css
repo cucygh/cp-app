@@ -1,2 +1,57 @@
 @import '../../theme/semantic/semantic.css';
+body{background:#fff}
 #wrap{min-width:783px;min-height:583px;}
+/* lottery-head */
+.lot-head{border-bottom:2px solid #d95c5c;height:55px;padding:10px;}
+.lot-head .item{display:inline-block;}
+.lot-head .profile{position:absolute;right:0;top:3px;}
+.profile .quick_item{float:left;position:relative}
+.quick_link {
+display: block;
+_width: 26px;
+height: 43px;
+padding: 0 15px;
+cursor: pointer;
+-webkit-transition: height .2s ease;
+-moz-transition: height .2s ease;
+-o-transition: height .2s ease;
+transition: height .2s ease;
+}
+.ico_history_26, .ico_collect_26, .ico_message_26, .ico_upload_26, .ico_vgirl_26 {
+display: inline-block;
+zoom: 1;
+width: 26px;
+height: 26px;
+background-image: url(/img/sprite_common.32.png);
+background-repeat: no-repeat;
+}
+.ico_collect_26 {
+background-position: -30px 0;
+}
+.quick_txt {display: block;margin-top: -2px;text-align: center;color: #b0b0b0;}
+.profile .divide {
+position: absolute;
+top: 6px;
+right: 0;
+width: 1px;
+height: 26px;
+overflow: hidden;
+background: #f0f0f0;
+background: -webkit-linear-gradient(top,rgba(252,252,252,1) 0,rgba(232,232,232,1) 50%,rgba(252,252,252,1) 100%);
+background: -moz-linear-gradient(top,rgba(252,252,252,1) 0,rgba(232,232,232,1) 50%,rgba(252,252,252,1) 100%);
+background: -ms-linear-gradient(top,rgba(252,252,252,1) 0,rgba(232,232,232,1) 50%,rgba(252,252,252,1) 100%);
+background: linear-gradient(top,rgba(252,252,252,1) 0,rgba(232,232,232,1) 50%,rgba(252,252,252,1) 100%);
+}
+.ui.menu.lot-nav{margin:0}
+.ui.card{float:left;margin-right:1em}
+.red{color:#c70000}
+.ui.segment.bet-red-code{margin-top:3em;padding:0.5em 1em}
+.ui.segment.bet-blue-code{margin-top:1em;padding:0.5em 1em}
+.ui.segment.bet-red-code .status{position:absolute;top:-3em}
+.ui.small.button.ball{width: 25px;height: 25px;line-height: 25px;padding: 0;border-radius: 12px;}
+#wrap .ui.segment .bet-ball{margin:0.5em!important}
+#bet-code{margin:0.5em 7em 0 2em;position:relative;}
+#bet-code .message{padding:0.5em 1em;}
+#bet-code .list{height:107px;overflow-y:auto;}
+#bet-code .operate{position:absolute;top:0em;right:-6.5em}
+#bet-code .operate .menu{width:6rem}
