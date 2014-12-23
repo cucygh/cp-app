@@ -81,10 +81,10 @@
 			</div>
 			<!-- 导航 -->
 			<div class="ui menu red lot-nav">
-			  <a class="item active">普通投注</a>
-			  <a class="item">胆拖投注</a>
-			  <a class="item">参与合买</a>
-			  <a class="item">定制跟单</a>			  
+			  <a href="#" class="item active">普通投注</a>
+			  <a href="#" class="item">胆拖投注</a>
+			  <a href="#" class="item">参与合买</a>
+			  <a href="#" class="item">定制跟单</a>			  
 			</div>
 			<!-- 三级导航 -->
 			<div class="ui segment bet-red-code" style="min-height: 9.5rem;">
@@ -134,9 +134,9 @@
 			  
 			  <div class="ui bottom attached label">
 				本期热号：03 09 23 33&nbsp;&nbsp;&nbsp;&nbsp;本期冷号：03 09 23 33
-				<div class="ui dropdown active visible" tabindex="0" style="float:right">
+				<div class="ui dropdown active visible random-ball" tabindex="0" style="float:right">
 					<div class="text">机选 6 个</div><i class="dropdown icon"></i>
-					<div class="random-num" style="display:none" type="red">
+					<div class="random-num" style="display:none" type="red" max="33">
 						<div class="ui button tiny">6</div>
 						<div class="ui button tiny">7</div>
 						<div class="ui button tiny">8</div>
@@ -181,9 +181,9 @@
 			 </div>
 			  <div class="ui bottom attached label">
 			  本期热号：03 09 23 33&nbsp;&nbsp;&nbsp;&nbsp;本期冷号：03 09 23 33
-				<div class="ui dropdown active visible" tabindex="0" style="float:right">
+				<div class="ui dropdown active visible random-ball" tabindex="0" style="float:right">
 					<div class="text">机选 1 个</div><i class="dropdown icon"></i>
-					<div class="random-num" style="display:none" type="blue">
+					<div class="random-num" style="display:none" type="blue" max="16">
 						<div class="ui button tiny">1</div>
 						<div class="ui button tiny">2</div>
 						<div class="ui button tiny">3</div>
@@ -207,16 +207,15 @@
 			
 			<div class="bet-static bet-confirm" style="text-align:center">
 				您选了<b class="red zhu">0</b>注，<b class="red money">0</b>元
-				<a class="ui teal image label add-bet">添加投注</a>
-				<a class="ui image label clear-bet">清空选号</a>
-			</div>			
+				<a href="#" class="ui teal image label add-bet">添加投注</a>
+				<a href="#" class="ui image label clear-bet">清空选号</a>
+			</div>
 			<div id="bet-code">
 				<div class="ui warning icon message">
 				  <div class="content">
-					  <div class="header">第 <b class="issue">20141208</b> 期  方案 <b class="red">15</b> 注，<b class="red">30</b> 元  <a class="ui image label">机选1注</a><a class="ui image label">机选5注</a><a class="ui image label">清空列表</a></div>
-						<ul class="list">
-						  <li><b class="txt">复式</b><b class="red">01 04 09 11 13 18 21</b>+<b class="blue">04 09</b><i class="remove icon"></i><b class="money">17注，34元</b> </li>
-						 
+					  <div class="header bet-detail">第 <b class="bet-issue">20141208</b> 期  方案 <b class="red bet-count">0</b> 注，<b class="red bet-money">0</b> 元  <a class="ui image label">机选1注</a><a class="ui image label">机选5注</a><a class="ui image label">清空列表</a></div>
+						<ul class="list" id="bet-list">
+							
 						</ul>
 				 </div>
 			    </div>	
@@ -245,13 +244,15 @@
 						</div>
 					  </div>
 					  <div class="ui two bottom attached buttons">
-						<div class="ui button yellow">发起合买</div>
-						<div class="ui button red">立即投注</div>
+						<div class="ui button yellow buy-cooperate">发起合买</div>
+						<div class="ui button red buy-own">立即投注</div>
 					  </div>
 					</div>
 				</div>				
-			</div>			
+			</div>
 		</div>
-			
+		 <script type="text/template" id="tpl-bet-item">
+			<li code="{{code}}" count="{{count}}"><b class="txt">{{type}}</b><b class="red">{{red}}</b>+<b class="blue">{{blue}}</b><i class="remove icon"></i><b class="money">{{count}}注，{{money}}元</b> </li>
+		 </script>
 	</body>
 </html>
