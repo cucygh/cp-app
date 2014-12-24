@@ -55,6 +55,7 @@ background: linear-gradient(top,rgba(252,252,252,1) 0,rgba(232,232,232,1) 50%,rg
 #wrap .random-num{width: 17em;position: absolute;z-index: 3;top: 2em;right: -2em;}
 #wrap .random-num .button{margin-bottom:0.5em;width:43px;padding: 0.8em 0.5em;}
 #wrap .icon.dropdown{margin-left:0.5em;}
+#wrap .countdown .red{margin:0 0.2em;}
 #bet-code{margin: 0.5em 18em 0 2em;position:relative;}
 #bet-code .message{padding:0.5em 1em;}
 #bet-code .message .header{text-align:right;}

@@ -9,10 +9,14 @@ define([], function () {
 				underscore : '/lib/underscore-1.6.0',
 				handlebars : '/gallery/handlebars-1.3.0',
 				md5 : '/gallery/md5-1.0.0',
-				modal : '/gallery/pop/3.0.0/modal',
+				modal : '/gallery/modal-1.0.0',
 				dimmer : '/gallery/dimmer-1.0.0',
 				timer : '/gallery/timer-1.0.0',
-				math : '/gallery/math-1.0.0'
+				lottery : '/gallery/lottery-1.0.0',
+				math : '/gallery/math-1.0.0',
+				'user-tpl' : '/lot/pub/user-tpl',
+				'm-user' : '/lot/pub/m-user',
+				'v-user' : '/lot/pub/v-user'
 			}
 		});
 });

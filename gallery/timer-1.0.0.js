@@ -1,6 +1,6 @@
-define(['jquery'], function ($) {
+define(['zepto'], function ($) {
 	'use strict';
-	var PRECISION = 100; // 0.1 seconds, used to update the DOM
+	var PRECISION = 1000; // 0.1 seconds, used to update the DOM
 	var instances = [],
 	matchers = [];
 	// Miliseconds
@@ -118,9 +118,9 @@ define(['jquery'], function ($) {
 		this.$el.data('countdown-instance', this.instanceNumber);
 		// Register the callbacks when supplied
 		if (callback) {
-			this.$el.on('update.countdown', callback);
-			this.$el.on('stoped.countdown', callback);
-			this.$el.on('finish.countdown', callback);
+			this.$el.on('update', callback);
+			this.$el.on('stoped', callback);
+			this.$el.on('finish', callback);
 		}
 		this.start();
 	};
@@ -187,7 +187,7 @@ define(['jquery'], function ($) {
 			}
 		},
 		dispatchEvent : function (eventName) {
-			var event = $.Event(eventName + '.countdown');
+			var event = $.Event(eventName);
 			event.finalDate = this.finalDate;
 			event.offset = $.extend({}, this.offset);
 			event.strftime = strftime(this.offset);
@@ -195,32 +195,34 @@ define(['jquery'], function ($) {
 		}
 	});
 	// Register the jQuery selector actions
-	$.fn.countdown = function () {
-		var argumentsArray = Array.prototype.slice.call(arguments, 0);
-		return this.each(function () {
-			// If no data was set, jQuery.data returns undefined
-			var instanceNumber = $(this).data('countdown-instance');
-			// Verify if we already have a countdown for this node ...
-			// Fix issue #22 (Thanks to @romanbsd)
-			if (instanceNumber !== undefined) {
-				var instance = instances[instanceNumber],
-				method = argumentsArray[0];
-				// If method exists in the prototype execute
-				if (Countdown.prototype.hasOwnProperty(method)) {
-					instance[method].apply(instance,
-						argumentsArray.slice(1));
-					// If method look like a date try to set a new final date
-				} else if (String(method).match(/^[$A-Z_][0-9A-Z_$]*$/i) === null) {
-					instance.setFinalDate.call(instance,
-						method);
+	$.extend($.fn, {
+		countdown : function () {
+			var argumentsArray = Array.prototype.slice.call(arguments, 0);
+			return this.each(function () {
+				// If no data was set, jQuery.data returns undefined
+				var instanceNumber = $(this).data('countdown-instance');
+				// Verify if we already have a countdown for this node ...
+				// Fix issue #22 (Thanks to @romanbsd)
+				if (instanceNumber !== undefined) {
+					var instance = instances[instanceNumber],
+					method = argumentsArray[0];
+					// If method exists in the prototype execute
+					if (Countdown.prototype.hasOwnProperty(method)) {
+						instance[method].apply(instance,
+							argumentsArray.slice(1));
+						// If method look like a date try to set a new final date
+					} else if (String(method).match(/^[$A-Z_][0-9A-Z_$]*$/i) === null) {
+						instance.setFinalDate.call(instance,
+							method);
+					} else {
+						$.error('Method %s does not exist on jQuery.countdown'.
+							replace(/\%s/gi, method));
+					}
 				} else {
-					$.error('Method %s does not exist on jQuery.countdown'.
-						replace(/\%s/gi, method));
+					// ... if not we create an instance
+					new Countdown(this, argumentsArray[0], argumentsArray[1]);
 				}
-			} else {
-				// ... if not we create an instance
-				new Countdown(this, argumentsArray[0], argumentsArray[1]);
-			}
-		});
-	};
+			});
+		}
+	});
 });

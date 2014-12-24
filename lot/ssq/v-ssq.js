@@ -1,6 +1,18 @@
-﻿define(['backbone', 'zepto', 'math','handlebars'], function (B, $, math,handlebar) {
+﻿define(['backbone', 'zepto', 'math','handlebars','lottery','underscore','timer','v-user'], function (B, $, math,handlebar,Lot,_,Timer,User) {
 	var View_ssq = B.View.extend({
 			el : '#wrap',
+			initialize:function(){
+				Lot.bet.get_cur_issue({id:220051,ok_call:function(d){
+					if (d && !_.isEmpty(d)) {
+						$('.issue').text(d.Issue);
+						/* 倒计时 */
+						$('.countdown').countdown(d.FsEndTime * 1000, function (event) {
+							$(this).html(event.strftime('<b class="day red">%D</b>天<b class="hour red">%H</b>时<b class="minute red">%M</b>分<b class="second red">%S</b>秒'));
+						});
+					}
+				}});
+				var user=new User();
+			},
 			events : {
 				'click .random-ball' : 'fun_dropdown',
 				'click .ui.dropdown .button' : 'fun_dropdown_button',
@@ -69,14 +81,11 @@
 					count:math.combo(red_ball.length,6)*blue_ball.length,
 					red:red_ball.join(' '),
 					blue:blue_ball.join(' ')
-				}
-				var item='<li code="{code}" count="{count}"><b class="txt">{type}</b><b class="red">{red}</b>+<b class="blue">{blue}</b><i class="remove icon"></i><b class="money">{count}注，{money}元</b> </li>';
-				item=item.replace(/\{code\}/g,data.code);
-				item=item.replace(/\{count\}/g,data.count);
-				item=item.replace(/\{type\}/g,data.count>1?"复式":"单式");
-				item=item.replace(/\{red\}/g,data.red);
-				item=item.replace(/\{blue\}/g,data.blue);
-				item=item.replace(/\{money\}/g,data.count*2);
+				};
+				data.money=data.count*2;
+				data.type=data.count>1?"复式":"单式";
+				var item=$('#bet-item').html();
+				item=Lot.string.compile(item,data);
 				$('#bet-list').append(item);
 				this.fun_rm_bet();//清空号码
 			},//清空选号
