@@ -1,39 +1,39 @@
-define(['zepto', 'underscore'], function ($, Lot) {
+ï»¿define(['zepto', 'underscore'], function ($, Lot) {
 	var domain = 'http://ygh.cp.360.cn';
-	// ²ÊÖÖ¼ò³Æ¡¢ID¡¢È«³Æ
+	// å½©ç§ç®€ç§°ã€IDã€å…¨ç§°
 	var lottery = {
-		ssq : [220051, 'Ë«É«Çò'],
-		slt : [120029, '³¬¼¶´óÀÖÍ¸'],
-		p3 : [110033, 'ÅÅÁĞÈı'],
-		p5 : [110035, 'ÅÅÁĞÎå'],
-		qxc : [110022, 'ÆßĞÇ²Ê'],
-		sd : [210053, '¸£²Ê3D'],
-		sdbj : [215152, '±±¾©3D'],
-		qlc : [220028, 'ÆßÀÖ²Ê'],
-		xw : [223515, '¶«·½15Ñ¡5'],
-		xwtj : [225303, 'Ìì½ò15Ñ¡5'],
-		jczq : [130042, '¾º²Ê×ãÇò'],
-		jclq : [130043, '¾º²ÊÀºÇò'],
-		dc : [130041, '±±¾©µ¥³¡'],
-		sfc : [130011, 'Ê¤¸º²Ê'],
-		rj : [130019, 'ÈÎÑ¡¾Å'],
-		kl8 : [265108, '±±¾©¿ìÀÖ8'],
-		syxwsd : [166406, 'É½¶«11Ñ¡5'],
-		syxwjx : [168009, 'ĞÂ11Ñ¡5'],
-		syxwgd : [165707, '¹ã¶«11Ñ¡5'],
-		syxwsh : [165207, 'ÉÏº£11Ñ¡5'],
-		syxwhlj : [166507, 'ĞÒÔË11Ñ¡5'],
-		sscjx : [258001, '½­Î÷Ê±Ê±²Ê'],
-		ssccq : [255401, 'ÖØÇìÊ±Ê±²Ê'],
-		k3js : [255903, '½­ËÕ¿ì3'],
-		k3hb : [257703, 'ºş±±¿ì3'],
-		k3nm : [257503, 'ÄÚÃÉ¿ì3'],
-		k3jl : [258203, '¼ªÁÖ¿ì3'],
-		pk3 : [166407, 'É½¶«¿ìÀÖÆË¿Ë3'],
-		jq4 : [130018, 'ËÄ³¡½øÇò'],
-		zc6 : [130016, '6³¡°ëÈ«³¡']
+		ssq : [220051, 'åŒè‰²çƒ'],
+		slt : [120029, 'è¶…çº§å¤§ä¹é€'],
+		p3 : [110033, 'æ’åˆ—ä¸‰'],
+		p5 : [110035, 'æ’åˆ—äº”'],
+		qxc : [110022, 'ä¸ƒæ˜Ÿå½©'],
+		sd : [210053, 'ç¦å½©3D'],
+		sdbj : [215152, 'åŒ—äº¬3D'],
+		qlc : [220028, 'ä¸ƒä¹å½©'],
+		xw : [223515, 'ä¸œæ–¹15é€‰5'],
+		xwtj : [225303, 'å¤©æ´¥15é€‰5'],
+		jczq : [130042, 'ç«å½©è¶³çƒ'],
+		jclq : [130043, 'ç«å½©ç¯®çƒ'],
+		dc : [130041, 'åŒ—äº¬å•åœº'],
+		sfc : [130011, 'èƒœè´Ÿå½©'],
+		rj : [130019, 'ä»»é€‰ä¹'],
+		kl8 : [265108, 'åŒ—äº¬å¿«ä¹8'],
+		syxwsd : [166406, 'å±±ä¸œ11é€‰5'],
+		syxwjx : [168009, 'æ–°11é€‰5'],
+		syxwgd : [165707, 'å¹¿ä¸œ11é€‰5'],
+		syxwsh : [165207, 'ä¸Šæµ·11é€‰5'],
+		syxwhlj : [166507, 'å¹¸è¿11é€‰5'],
+		sscjx : [258001, 'æ±Ÿè¥¿æ—¶æ—¶å½©'],
+		ssccq : [255401, 'é‡åº†æ—¶æ—¶å½©'],
+		k3js : [255903, 'æ±Ÿè‹å¿«3'],
+		k3hb : [257703, 'æ¹–åŒ—å¿«3'],
+		k3nm : [257503, 'å†…è’™å¿«3'],
+		k3jl : [258203, 'å‰æ—å¿«3'],
+		pk3 : [166407, 'å±±ä¸œå¿«ä¹æ‰‘å…‹3'],
+		jq4 : [130018, 'å››åœºè¿›çƒ'],
+		zc6 : [130016, '6åœºåŠå…¨åœº']
 	};
-	// Ö§¸¶URL
+	// æ”¯ä»˜URL
 	var pay_url = {
 		bet : domain + '/int/bet/',
 		team : domain + '/int/teambet/',
@@ -42,11 +42,11 @@ define(['zepto', 'underscore'], function ($, Lot) {
 		pteam : domain + '/int/pteambet/'
 	};
 	/**
-	 * ×Ö·û´®Ïà¹Ø
+	 * å­—ç¬¦ä¸²ç›¸å…³
 	 */
 	var string = {
 		/**
-		 * ¼òµ¥µÄÄ£°å±àÒë
+		 * ç®€å•çš„æ¨¡æ¿ç¼–è¯‘
 		 * @param tpl {string}
 		 * @param data {Object}
 		 * @return tpl {string}
@@ -62,14 +62,14 @@ define(['zepto', 'underscore'], function ($, Lot) {
 	};
 
 	/**
-	 * Í¶×¢Ïà¹Ø
+	 * æŠ•æ³¨ç›¸å…³
 	 */
 	var bet = {
 		/**
-		 * »ñÈ¡²ÊÖÖĞÅÏ¢£¬º¬¼òĞ´¡¢id¡¢È«³Æ
-		 * @param name {String} 					eg:'130016' || 'zc6' || '6³¡°ëÈ«³¡' || '6³¡' || '°ëÈ«³¡'
+		 * è·å–å½©ç§ä¿¡æ¯ï¼Œå«ç®€å†™ã€idã€å…¨ç§°
+		 * @param name {String} 					eg:'130016' || 'zc6' || '6åœºåŠå…¨åœº' || '6åœº' || 'åŠå…¨åœº'
 		 * @ignore created
-		 * @return result {Array}				eg:['zc6',130016, '6³¡°ëÈ«³¡']
+		 * @return result {Array}				eg:['zc6',130016, '6åœºåŠå…¨åœº']
 		 */
 		get_lot_name : function (name) {
 			var by_name = /^[a-z\d]+$/gi.test(name);
@@ -88,18 +88,18 @@ define(['zepto', 'underscore'], function ($, Lot) {
 			return p_arr;
 		},
 		/**
-		 * »ñÈ¡Ö§¸¶URL
+		 * è·å–æ”¯ä»˜URL
 		 * @param con {String}
 		 * @ignore created
 		 * @return result {Array}
 		 */
 		get_pay_url : function (con) {
 			var refer = {
-				bet : '´ú¹º',
-				team : 'ºÏÂò',
-				join : 'ÈÏ¹º',
-				trace : '×·ºÅ',
-				pteam : 'ÏÈ·¢Æğ'
+				bet : 'ä»£è´­',
+				team : 'åˆä¹°',
+				join : 'è®¤è´­',
+				trace : 'è¿½å·',
+				pteam : 'å…ˆå‘èµ·'
 			};
 			var p,
 			url;
@@ -112,7 +112,7 @@ define(['zepto', 'underscore'], function ($, Lot) {
 			return url || false;
 		},
 		/**
-		 * »ñÈ¡²ÊÖÖ»ù±¾ĞÅÏ¢
+		 * è·å–å½©ç§åŸºæœ¬ä¿¡æ¯
 		 * @param id {String}
 		 * @ignore created
 		 * @return result {Object}
@@ -152,8 +152,60 @@ define(['zepto', 'underscore'], function ($, Lot) {
 			})
 		}
 	}
+	//cookieç›¸å…³
+	var cookie = {
+		/**
+		 * @description setè®¾ç½®cookie, delåˆ é™¤cookie,å½“expireså°äº0æ—¶å³ä¸ºåˆ é™¤cookie
+		 * @param {Object} options={name:,value:,expires:,domain:,path:,secure:,encode:}ã€å¿…é€‰ã€‘
+		 * @param {String} name cookieçš„åç§°ã€å¿…é€‰ã€‘
+		 * @param {String} value cookieçš„å€¼ã€å¿…é€‰ã€‘
+		 * @param {Number} expires cookieçš„è¿‡æœŸæ—¶é—´ï¼Œä¸ºæ•´æ•°ï¼Œå•ä½ä¸ºå¤©ï¼Œä¸ºè´Ÿæ—¶åˆ é™¤cookieã€å¯é€‰ã€‘
+		 * @param {String} domain  æŒ‡å®šcookieæ‰€å±çš„åŸŸã€å¯é€‰ã€‘
+		 * @param {String} path  æŒ‡å®šcookie çš„è·¯å¾„ã€å¯é€‰ã€‘
+		 * @param {Boolean} secure  æ˜¯å¦å®‰å…¨ä¼ è¾“ å½“åè®®ä¸ºhttpsæ—¶æ‰å¯ç”¨ã€å¯é€‰ã€‘
+		 * @param {Boolean} encode  æ˜¯å¦å¯¹å€¼è¿›è¡ŒencodeURIComponentã€å¯é€‰ã€‘
+		 */
+		set : function (options) {
+			var ck = [];
+			ck.push(options.name + '=');
+			if (options.value) {
+				ck.push(!!options.encode ? options.value : encodeURIComponent(options.value));
+				//æ˜¯å¦encodeURIComponent
+			}
+			if (options.expires) {
+				var d = new Date();
+				d.setHours(0);
+				d.setMinutes(0);
+				d.setSeconds(0);
+				d.setTime(d.getTime() + options.expires * 86400000);
+				//24 * 60 * 60 * 1000
+				ck.push(';expires=' + d.toGMTString());
+			}
+			if (options.domain) {
+				ck.push(';domain=' + options.domain);
+			}
+			ck.push(';path=' + (options.path || '/'));
+			if (options.secure) {
+				ck.push(';secure');
+			}
+			document.cookie = ck.join('');
+		},
+		/**
+		 * @description å¾—åˆ°æŒ‡å®šçš„cookieå€¼
+		 * @example Q.cookie.get('name')
+		 * @param {String} name cookieåç§°ã€å¿…é€‰ã€‘
+		 * @param {Boolean} encode æ˜¯å¦encodeURIComponent é»˜è®¤falseã€å¯é€‰ã€‘
+		 * @return æŒ‡å®šcookieçš„å€¼
+		 */
+		get : function (name, encode) {
+			var m = document.cookie.match(new RegExp("(^| )" + name + "=([^;])*", "gi")),
+			v = !m ? '' : m[0].split(name + '=')[1];
+			return (!!encode ? v : decodeURIComponent(v));
+		}
+	}
 	return {
 		string : string,
-		bet : bet
+		bet : bet,
+		cookie : cookie
 	}
 });

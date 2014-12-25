@@ -1,45 +1,64 @@
-define(['backbone', 'md5', 'zepto'], function (Backbone, md5, $) {
+define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
 	var Login = Backbone.Model.extend({
 			isOn : false,
 			userName : '',
 			msg : '',
+			imgurl:'',
 			domain : 'http://ygh.cp.360.cn/',
 			initialize : function () {
 				var _this = this;
-				chrome.cookies.get({
-					"url" : _this.domain,
-					"name" : 'Q'
-				}, function (c) {
-					if (c) {
-						$.ajax({
-							url : 'http://login.360.cn/?o=sso&m=info&show_name_flag=1',
-							dataType : 'json',
-							data:{
-								o:'sso',
-								m:'info',
-								show_name_flag:1
-							},
-							success : function (data) {
-								_this.set({
-									userName : data.userName,
-									isOn : true
-								});
-								console.log(data);
-							},
-							type : 'post',
-							error : function (err) {
-								_this.set({
-									userName : '未登录',
-									isOn : false
-								})
-							}
-						});
-					} else {
-						_this.set({
-							isOn : false,
-						});
-					}
-				});
+				var is_web = location.protocol == 'chrome-extension:' ? false : true;
+				if (is_web) {
+					$.ajax({
+						url : _this.domain + 'int/querybalance/',
+						dataType : 'json',
+						success : function (data) {
+							_this.set({
+								userName : data.username,
+								imgurl:data.imgUrl,
+								isOn : data.code==0 ? true : false
+							});
+							console.log(data);
+						},
+						type : 'post',
+						error : function (err) {
+							_this.set({
+								userName : '未登录',
+								isOn : false
+							})
+						}
+					});
+				} else {
+					chrome.cookies.get({
+						"url" : _this.domain,
+						"name" : 'Q'
+					}, function (c) {
+						if (c) {
+							$.ajax({
+								url : _this.domain + 'int/querybalance/',
+								dataType : 'json',
+								success : function (data) {
+									_this.set({
+										userName : data.username,
+										imgurl:data.imgUrl,
+										isOn : data?true:false
+									});
+								},
+								type : 'post',
+								error : function (err) {
+									_this.set({
+										userName : '未登录',
+										isOn : false
+									})
+								}
+							});
+						} else {
+							_this.set({
+								isOn : false,
+							});
+						}
+					});
+				}
 			},
 			login : function (user, pwd, keep, captcha) {
 				var _this = this;

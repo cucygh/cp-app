@@ -1,21 +1,36 @@
 define(['backbone', 'zepto', 'm-user', 'user-tpl', 'modal'], function (Backbone, $, Login, TplLogin, Modal) {
-	var login=new Login();
+	var login = new Login();
 	var $login;
 	var Vlogin = Backbone.View.extend({
+			el : '#wrap',
 			initialize : function () {
 				login.unbind();
 				login.bind('change:isOn', this.login_call);
 				login.bind('change:msg', this.msg_call);
 			},
-			login_call:function(e){
-				var tpl_login='<i class="icon user"></i><a href="#" class="username">{{username}}</a> | <a href="#" class="exit">退出</a>';
-				var tpl_exit='<a href="#" class="login">登录</a> | <a href="#" class="register">注册</a>';
-				if(e.changed.isOn){
-					tpl_login=tpl_login.replace('{{username}}',e.attributes.userName);
-					$('.profile').html(tpl_login);
-				}else{
+			events : {
+				'click .login' : 'show',
+				'click .exit' : 'exit',
+				'click .btn-login':'fun_login'
+			},
+			login_call : function (e) {
+				var tpl_login = '<i class="icon user"></i><a href="#" class="username">{{username}}</a> | <a href="#" class="exit">退出</a>';
+				var tpl_exit = '<p class="no-login"><a href="#" class="login">登录</a> | <a href="#" class="exit">退出</a></p>';
+				if (e.changed.isOn) {
+					console.log(e);
+					$('.quick_user img').attr('src', e.attributes.imgurl).attr('title', e.attributes.userName);
+				} else {
 					$('.profile').html(tpl_exit);
 				}
+			},
+			fun_login:function(e){
+				e&&e.preventDefault();
+				console.log('is loging');
+				var user=$('#user').val();
+				var pwd=$('#pwd').val();
+				var captcha=$('#captcha');
+				captcha=captcha.is(':visible')?captcha.val():'';
+				login.login(user,pwd,1,captcha);
 			},
 			msg_call : function (e) {
 				if (e.attributes.msg != 'ok') {
@@ -31,34 +46,42 @@ define(['backbone', 'zepto', 'm-user', 'user-tpl', 'modal'], function (Backbone,
 					$login.modal('hide').remove();
 				}
 			},
-			show:function(){
-				$login=$(TplLogin({user:login.attributes.userName}));
-				$login.modal('setting',{
-					selector:{
-						approve:'.actions .login',
-						deny:'.actions .cancel'
-					},
-					onApprove:function(){
-						var user=$('#user').val();
-						var pwd=$('#pwd').val();
-						var captcha=$('#captcha');
-						captcha=captcha.is(':visible')?captcha.val():'';
-						login.login(user,pwd,1,captcha);
-						return false;
-					},
-					onDeny:function(){
-						$login.modal('hide').remove();
-					}
-				}).modal('show');
-				$login.on('click','.auth img',function(){
-					var $self=$(this);
-					var url=$self.attr('src').replace(/t=\d+/g,'t='+(+new Date()));
-					$self.attr('src',url);
+			show : function (e) {
+				e && e.preventDefault();
+				$.pgwModal({
+					title:'帐号登录',
+					maxWidth:390,
+					content : TplLogin({
+						user : login.attributes.userName
+					})
 				});
+				/* $.pgwModal('setting',{
+				selector:{
+				approve:'.actions .login',
+				deny:'.actions .cancel'
+				},
+				onApprove:function(){
+				var user=$('#user').val();
+				var pwd=$('#pwd').val();
+				var captcha=$('#captcha');
+				captcha=captcha.is(':visible')?captcha.val():'';
+				login.login(user,pwd,1,captcha);
+				return false;
+				},
+				onDeny:function(){
+				$login.modal('hide').remove();
+				}
+				}).modal('show'); */
+				/* $login.on('click','.auth img',function(){
+				var $self=$(this);
+				var url=$self.attr('src').replace(/t=\d+/g,'t='+(+new Date()));
+				$self.attr('src',url);
+				}); */
 			},
-			exit:function(){
+			exit : function (e) {
+				e && e.preventDefault();
 				login.exit();
 			}
 		});
-		return Vlogin;
+	return Vlogin;
 });
