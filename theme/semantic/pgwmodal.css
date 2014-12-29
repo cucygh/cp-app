@@ -100,3 +100,6 @@ body.pgwModalOpen {
     width: 20px;
     background-position: 0 -167px;
 }
+.pgwModal .tips-error{
+	margin-left:5em!important;
+}

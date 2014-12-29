@@ -5,5 +5,5 @@
 
 exports.index = function(req, res){
   res.header('Access-Control-Allow-Origin', '*');
-  res.render('lot/ssq/ssq.html', { title: 'Express' });
+  res.render('html/ssq/ssq.html', { title: 'Express' });
 };
