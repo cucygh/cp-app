@@ -37,6 +37,9 @@ define(['lottery','backbone','md5'],function(Lot,Backbone,md5){
 		get_msg:function(){
 			
 		},
+		get_order:function(){
+			
+		},
 		pwd_md5:function(txt){
 			return md5('fcfa5d2e|'+txt+'|fcfa5d2e');
 		},

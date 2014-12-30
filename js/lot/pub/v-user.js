@@ -20,8 +20,11 @@ define(['backbone', 'zepto', 'm-user', 'user-tpl', 'modal','lottery'], function 
 				var str;
 				if (e.changed.isOn) {
 					str=Lot.string.compile(tpl_login,{img_url:e.attributes.imgurl||e.attributes.userinfo.imgUrl,user:e.attributes.userName});
+					// 登录后查看余额
+					login.get_detail();
 				} else {
 					str=tpl_exit;
+					localStorage.clear();//清除所有缓存
 				}
 				$('.profile').html(str);
 			},

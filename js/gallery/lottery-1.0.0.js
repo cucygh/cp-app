@@ -81,7 +81,7 @@
 			var p_arr = [];
 			for (var p in lottery) {
 				p_arr = [p].concat(lottery[p]);
-				if (lottery[p][index].indexOf(name) > -1) {
+				if (p == name || lottery[p][index].toString().indexOf(name) > -1) {
 					break;
 				}
 			}
@@ -150,6 +150,28 @@
 				},
 				timeout : 1000
 			})
+		},
+		/**
+		 * 生成订单
+		 * @param data {Object}
+		 * @param data {Object}
+		 * @param data {Object}
+		 * @ignore created
+		 * @return result {Array}
+		 */
+		post : function (param, callback) {
+			var _url = bet.get_pay_url(param.BetType);
+			$.ajax({
+				url : _url,
+				type : 'POST',
+				data : param,
+				dataType : 'json',
+				success : function (res) {
+					if (callback && callback instanceof Function) {
+						callback.call(null, res);
+					}
+				}
+			})
 		}
 	}
 	//cookie相关
@@ -202,10 +224,15 @@
 			v = !m ? '' : m[0].split(name + '=')[1];
 			return (!!encode ? v : decodeURIComponent(v));
 		}
+	};
+	//辅助相关
+	var help={
+		is_web:location.protocol=="chrome-extension:"?false:true,//是否为web端，false为扩展应用
 	}
 	return {
 		string : string,
 		bet : bet,
-		cookie : cookie
+		cookie : cookie,
+		help:help
 	}
 });

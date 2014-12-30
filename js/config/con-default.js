@@ -12,10 +12,14 @@ require.config({
 		lottery : 'gallery/lottery-1.0.0',
 		math : 'gallery/math-1.0.0',
 		'user-tpl' : 'lot/pub/user-tpl',
+		'pay-tpl' : 'lot/pub/pay-tpl',
 		'm-user' : 'lot/pub/m-user',
 		'v-user' : 'lot/pub/v-user',
 		'm-ssq' : 'lot/ssq/m-ssq',
 		'v-ssq' : 'lot/ssq/v-ssq',
-		'r-ssq' : 'lot/ssq/r-ssq'
+		'r-ssq' : 'lot/ssq/r-ssq',
+		'm-pay' : 'lot/pub/m-pay',
+		'v-pay' : 'lot/pub/v-pay',
+		'r-pay' : 'lot/pub/r-pay'
 	}
 });

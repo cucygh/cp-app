@@ -1,10 +1,10 @@
-define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
+define(['backbone', 'md5', 'zepto', 'lottery'], function (Backbone, md5, $, Lot) {
 	var is_web;
 	var Login = Backbone.Model.extend({
 			isOn : false,
 			userName : '',
 			msg : '',
-			imgurl:'',
+			imgurl : '',
 			domain : 'http://ygh.cp.360.cn/',
 			initialize : function () {
 				var _this = this;
@@ -16,8 +16,8 @@ define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
 						success : function (data) {
 							_this.set({
 								userName : data.username,
-								imgurl:data.imgUrl,
-								isOn : data.code==0 ? true : false
+								imgurl : data.imgUrl,
+								isOn : data.code == 0 ? true : false
 							});
 						},
 						type : 'post',
@@ -40,8 +40,8 @@ define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
 								success : function (data) {
 									_this.set({
 										userName : data.username,
-										imgurl:data.imgUrl,
-										isOn : data?true:false
+										imgurl : data.imgUrl,
+										isOn : data ? true : false
 									});
 								},
 								type : 'post',
@@ -99,7 +99,7 @@ define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
 										'value' : data.attributes.userinfo.userName
 									});
 								}
-								
+
 							} else {
 								_this.set({
 									isOn : false,
@@ -133,7 +133,7 @@ define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
 					error : function () {
 						_this.set({
 							msg : '退出失败',
-							isOn:false
+							isOn : false
 						});
 					}
 				});
@@ -152,6 +152,25 @@ define(['backbone', 'md5', 'zepto','lottery'], function (Backbone, md5, $,Lot) {
 					}
 				}
 				return r;
+			},
+			//获取个人信息
+			get_detail : function (callback) {
+				var url = this.domain + 'int/querybalance/';
+				$.ajax({
+					url : url,
+					dataType : 'json',
+					data:{coupons:1},
+					success : function (data) {
+						if (data.code == 0) {
+							localStorage.setItem('ipad_user', JSON.stringify(data));
+							if (callback && callback instanceof Function) {
+								callback.call(null, data);
+							}
+						}
+					},
+					type : 'post',
+					error : function (err) {}
+				});
 			}
 		});
 	return Login;
