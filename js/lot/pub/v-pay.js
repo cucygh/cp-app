@@ -2,12 +2,10 @@ define(['zepto', 'backbone', 'm-pay', 'lottery', 'pay-tpl'], function ($, B, mPa
 	var vPay = B.View.extend({
 			el : '#wrap',
 			initialize : function () {
-				var order = localStorage.getItem('ipad_order');
-				var user = localStorage.getItem('ipad_user');
+				var order = this.get_order();
+				var user = this.get_user();
 				if (order && user) {
 					try {
-						order = JSON.parse(order);
-						user = JSON.parse(user);
 						var detail = order.xValue;
 						var $view = $(this.el);
 						var type = {
@@ -43,7 +41,54 @@ define(['zepto', 'backbone', 'm-pay', 'lottery', 'pay-tpl'], function ($, B, mPa
 			events : {
 				'click #btn-pay' : 'fun_pay',
 			},
-			fun_pay : function () {}
+			get_order : function () {
+				var order = localStorage.getItem('ipad_order');
+				if (order) {
+					return JSON.parse(order);
+				} else {
+					return false;
+				}
+			},
+			get_user : function () {
+				var user = localStorage.getItem('ipad_user');
+				if (user) {
+					return JSON.parse(user);
+				} else {
+					return false;
+				}
+			},
+			fun_pay : function () {
+				var order = this.get_order().xValue;
+				var param = {
+					chan : 1, //消费类型1现金 2红包 3组合支付
+					from : '2',
+					orderamt : order.TradeMoney,
+					orderid : order.OrderID,
+					ordername : '双色球 第2014153期 代购',
+					ordertime : order.OrderTime,
+					paypass : this.model.pwd_md5($('#pay_pwd').val()),
+					paytype : order.TypeID,
+					lotid : order.LotID,
+					coupons : 'cash',
+					t : +new Date
+				};
+				var param2 = {
+					ch : param.chan,
+					cs : param.coupons,
+					fr : param.from,
+					oa : param.orderamt,
+					oi : param.orderid,
+					on : param.ordername,
+					ot : param.ordertime,
+					pp : param.paypass,
+					pt : param.paytype,
+					lotid : param.lotid,
+					tt : +new Date
+				};
+				this.model.post(param2, function (res) {
+					console.log(res);
+				})
+			}
 		});
 	return vPay;
 });

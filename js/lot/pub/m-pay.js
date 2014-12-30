@@ -13,8 +13,9 @@ define(['lottery','backbone','md5'],function(Lot,Backbone,md5){
 		post:function(data,callback){
 			this.count++;
 			var _self=this;
-			data.paypass=_self.pwd_md5(data.paypass);
-			data['sign']=_self.sign_md5(data);
+			// data.paypass=_self.pwd_md5(data.paypass);
+			// data['sign']=_self.sign_md5(data);
+			data['s']=_self.sign_md5(data);
 			$.ajax({
 				url:_self.domain+_self.url,
 				data:data,
@@ -37,15 +38,15 @@ define(['lottery','backbone','md5'],function(Lot,Backbone,md5){
 		get_msg:function(){
 			
 		},
-		get_order:function(){
-			
-		},
 		pwd_md5:function(txt){
 			return md5('fcfa5d2e|'+txt+'|fcfa5d2e');
 		},
 		sign_md5:function(data){
 			var arr=[];
 			for(var p in data){
+				if(p=='tt'||p=='lotid'){
+					continue;
+				}
 				arr.push(p+'='+data[p]);
 			}
 			arr.push('key=353f32ef57aceb1b90ea4cf2afacb595');
