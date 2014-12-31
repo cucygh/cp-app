@@ -50,6 +50,8 @@ define(['lottery','backbone','md5'],function(Lot,Backbone,md5){
 				arr.push(p+'='+data[p]);
 			}
 			arr.push('key=353f32ef57aceb1b90ea4cf2afacb595');
+			console.log(arr.join('&'));
+			console.log(md5(arr.join('&')));
 			return md5(arr.join('&'));
 		}
 	});

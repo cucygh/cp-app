@@ -1,39 +1,39 @@
-ï»¿define(['zepto', 'underscore'], function ($, Lot) {
+define(['zepto', 'underscore'], function ($, Lot) {
 	var domain = 'http://ygh.cp.360.cn';
-	// å½©ç§ç®€ç§°ã€IDã€å…¨ç§°
+	// ²ÊÖÖ¼ò³Æ¡¢ID¡¢È«³Æ
 	var lottery = {
-		ssq : [220051, 'åŒè‰²çƒ'],
-		slt : [120029, 'è¶…çº§å¤§ä¹é€'],
-		p3 : [110033, 'æ’åˆ—ä¸‰'],
-		p5 : [110035, 'æ’åˆ—äº”'],
-		qxc : [110022, 'ä¸ƒæ˜Ÿå½©'],
-		sd : [210053, 'ç¦å½©3D'],
-		sdbj : [215152, 'åŒ—äº¬3D'],
-		qlc : [220028, 'ä¸ƒä¹å½©'],
-		xw : [223515, 'ä¸œæ–¹15é€‰5'],
-		xwtj : [225303, 'å¤©æ´¥15é€‰5'],
-		jczq : [130042, 'ç«å½©è¶³çƒ'],
-		jclq : [130043, 'ç«å½©ç¯®çƒ'],
-		dc : [130041, 'åŒ—äº¬å•åœº'],
-		sfc : [130011, 'èƒœè´Ÿå½©'],
-		rj : [130019, 'ä»»é€‰ä¹'],
-		kl8 : [265108, 'åŒ—äº¬å¿«ä¹8'],
-		syxwsd : [166406, 'å±±ä¸œ11é€‰5'],
-		syxwjx : [168009, 'æ–°11é€‰5'],
-		syxwgd : [165707, 'å¹¿ä¸œ11é€‰5'],
-		syxwsh : [165207, 'ä¸Šæµ·11é€‰5'],
-		syxwhlj : [166507, 'å¹¸è¿11é€‰5'],
-		sscjx : [258001, 'æ±Ÿè¥¿æ—¶æ—¶å½©'],
-		ssccq : [255401, 'é‡åº†æ—¶æ—¶å½©'],
-		k3js : [255903, 'æ±Ÿè‹å¿«3'],
-		k3hb : [257703, 'æ¹–åŒ—å¿«3'],
-		k3nm : [257503, 'å†…è’™å¿«3'],
-		k3jl : [258203, 'å‰æ—å¿«3'],
-		pk3 : [166407, 'å±±ä¸œå¿«ä¹æ‰‘å…‹3'],
-		jq4 : [130018, 'å››åœºè¿›çƒ'],
-		zc6 : [130016, '6åœºåŠå…¨åœº']
+		ssq : [220051, 'Ë«É«Çò'],
+		slt : [120029, '³¬¼¶´óÀÖÍ¸'],
+		p3 : [110033, 'ÅÅÁĞÈı'],
+		p5 : [110035, 'ÅÅÁĞÎå'],
+		qxc : [110022, 'ÆßĞÇ²Ê'],
+		sd : [210053, '¸£²Ê3D'],
+		sdbj : [215152, '±±¾©3D'],
+		qlc : [220028, 'ÆßÀÖ²Ê'],
+		xw : [223515, '¶«·½15Ñ¡5'],
+		xwtj : [225303, 'Ìì½ò15Ñ¡5'],
+		jczq : [130042, '¾º²Ê×ãÇò'],
+		jclq : [130043, '¾º²ÊÀºÇò'],
+		dc : [130041, '±±¾©µ¥³¡'],
+		sfc : [130011, 'Ê¤¸º²Ê'],
+		rj : [130019, 'ÈÎÑ¡¾Å'],
+		kl8 : [265108, '±±¾©¿ìÀÖ8'],
+		syxwsd : [166406, 'É½¶«11Ñ¡5'],
+		syxwjx : [168009, 'ĞÂ11Ñ¡5'],
+		syxwgd : [165707, '¹ã¶«11Ñ¡5'],
+		syxwsh : [165207, 'ÉÏº£11Ñ¡5'],
+		syxwhlj : [166507, 'ĞÒÔË11Ñ¡5'],
+		sscjx : [258001, '½­Î÷Ê±Ê±²Ê'],
+		ssccq : [255401, 'ÖØÇìÊ±Ê±²Ê'],
+		k3js : [255903, '½­ËÕ¿ì3'],
+		k3hb : [257703, 'ºş±±¿ì3'],
+		k3nm : [257503, 'ÄÚÃÉ¿ì3'],
+		k3jl : [258203, '¼ªÁÖ¿ì3'],
+		pk3 : [166407, 'É½¶«¿ìÀÖÆË¿Ë3'],
+		jq4 : [130018, 'ËÄ³¡½øÇò'],
+		zc6 : [130016, '6³¡°ëÈ«³¡']
 	};
-	// æ”¯ä»˜URL
+	// Ö§¸¶URL
 	var pay_url = {
 		bet : domain + '/int/bet/',
 		team : domain + '/int/teambet/',
@@ -42,11 +42,11 @@
 		pteam : domain + '/int/pteambet/'
 	};
 	/**
-	 * å­—ç¬¦ä¸²ç›¸å…³
+	 * ×Ö·û´®Ïà¹Ø
 	 */
 	var string = {
 		/**
-		 * ç®€å•çš„æ¨¡æ¿ç¼–è¯‘
+		 * ¼òµ¥µÄÄ£°å±àÒë
 		 * @param tpl {string}
 		 * @param data {Object}
 		 * @return tpl {string}
@@ -62,14 +62,14 @@
 	};
 
 	/**
-	 * æŠ•æ³¨ç›¸å…³
+	 * Í¶×¢Ïà¹Ø
 	 */
 	var bet = {
 		/**
-		 * è·å–å½©ç§ä¿¡æ¯ï¼Œå«ç®€å†™ã€idã€å…¨ç§°
-		 * @param name {String} 					eg:'130016' || 'zc6' || '6åœºåŠå…¨åœº' || '6åœº' || 'åŠå…¨åœº'
+		 * »ñÈ¡²ÊÖÖĞÅÏ¢£¬º¬¼òĞ´¡¢id¡¢È«³Æ
+		 * @param name {String} 					eg:'130016' || 'zc6' || '6³¡°ëÈ«³¡' || '6³¡' || '°ëÈ«³¡'
 		 * @ignore created
-		 * @return result {Array}				eg:['zc6',130016, '6åœºåŠå…¨åœº']
+		 * @return result {Array}				eg:['zc6',130016, '6³¡°ëÈ«³¡']
 		 */
 		get_lot_name : function (name) {
 			var by_name = /^[a-z\d]+$/gi.test(name);
@@ -88,18 +88,18 @@
 			return p_arr;
 		},
 		/**
-		 * è·å–æ”¯ä»˜URL
+		 * »ñÈ¡Ö§¸¶URL
 		 * @param con {String}
 		 * @ignore created
 		 * @return result {Array}
 		 */
 		get_pay_url : function (con) {
 			var refer = {
-				bet : 'ä»£è´­',
-				team : 'åˆä¹°',
-				join : 'è®¤è´­',
-				trace : 'è¿½å·',
-				pteam : 'å…ˆå‘èµ·'
+				bet : '´ú¹º',
+				team : 'ºÏÂò',
+				join : 'ÈÏ¹º',
+				trace : '×·ºÅ',
+				pteam : 'ÏÈ·¢Æğ'
 			};
 			var p,
 			url;
@@ -112,7 +112,7 @@
 			return url || false;
 		},
 		/**
-		 * è·å–å½©ç§åŸºæœ¬ä¿¡æ¯
+		 * »ñÈ¡²ÊÖÖ»ù±¾ĞÅÏ¢
 		 * @param id {String}
 		 * @ignore created
 		 * @return result {Object}
@@ -152,7 +152,7 @@
 			})
 		},
 		/**
-		 * ç”Ÿæˆè®¢å•
+		 * Éú³É¶©µ¥
 		 * @param data {Object}
 		 * @param data {Object}
 		 * @param data {Object}
@@ -174,25 +174,25 @@
 			})
 		}
 	}
-	//cookieç›¸å…³
+	//cookieÏà¹Ø
 	var cookie = {
 		/**
-		 * @description setè®¾ç½®cookie, delåˆ é™¤cookie,å½“expireså°äº0æ—¶å³ä¸ºåˆ é™¤cookie
-		 * @param {Object} options={name:,value:,expires:,domain:,path:,secure:,encode:}ã€å¿…é€‰ã€‘
-		 * @param {String} name cookieçš„åç§°ã€å¿…é€‰ã€‘
-		 * @param {String} value cookieçš„å€¼ã€å¿…é€‰ã€‘
-		 * @param {Number} expires cookieçš„è¿‡æœŸæ—¶é—´ï¼Œä¸ºæ•´æ•°ï¼Œå•ä½ä¸ºå¤©ï¼Œä¸ºè´Ÿæ—¶åˆ é™¤cookieã€å¯é€‰ã€‘
-		 * @param {String} domain  æŒ‡å®šcookieæ‰€å±çš„åŸŸã€å¯é€‰ã€‘
-		 * @param {String} path  æŒ‡å®šcookie çš„è·¯å¾„ã€å¯é€‰ã€‘
-		 * @param {Boolean} secure  æ˜¯å¦å®‰å…¨ä¼ è¾“ å½“åè®®ä¸ºhttpsæ—¶æ‰å¯ç”¨ã€å¯é€‰ã€‘
-		 * @param {Boolean} encode  æ˜¯å¦å¯¹å€¼è¿›è¡ŒencodeURIComponentã€å¯é€‰ã€‘
+		 * @description setÉèÖÃcookie, delÉ¾³ıcookie,µ±expiresĞ¡ÓÚ0Ê±¼´ÎªÉ¾³ıcookie
+		 * @param {Object} options={name:,value:,expires:,domain:,path:,secure:,encode:}¡¾±ØÑ¡¡¿
+		 * @param {String} name cookieµÄÃû³Æ¡¾±ØÑ¡¡¿
+		 * @param {String} value cookieµÄÖµ¡¾±ØÑ¡¡¿
+		 * @param {Number} expires cookieµÄ¹ıÆÚÊ±¼ä£¬ÎªÕûÊı£¬µ¥Î»ÎªÌì£¬Îª¸ºÊ±É¾³ıcookie¡¾¿ÉÑ¡¡¿
+		 * @param {String} domain  Ö¸¶¨cookieËùÊôµÄÓò¡¾¿ÉÑ¡¡¿
+		 * @param {String} path  Ö¸¶¨cookie µÄÂ·¾¶¡¾¿ÉÑ¡¡¿
+		 * @param {Boolean} secure  ÊÇ·ñ°²È«´«Êä µ±Ğ­ÒéÎªhttpsÊ±²Å¿ÉÓÃ¡¾¿ÉÑ¡¡¿
+		 * @param {Boolean} encode  ÊÇ·ñ¶ÔÖµ½øĞĞencodeURIComponent¡¾¿ÉÑ¡¡¿
 		 */
 		set : function (options) {
 			var ck = [];
 			ck.push(options.name + '=');
 			if (options.value) {
 				ck.push(!!options.encode ? options.value : encodeURIComponent(options.value));
-				//æ˜¯å¦encodeURIComponent
+				//ÊÇ·ñencodeURIComponent
 			}
 			if (options.expires) {
 				var d = new Date();
@@ -213,11 +213,11 @@
 			document.cookie = ck.join('');
 		},
 		/**
-		 * @description å¾—åˆ°æŒ‡å®šçš„cookieå€¼
+		 * @description µÃµ½Ö¸¶¨µÄcookieÖµ
 		 * @example Q.cookie.get('name')
-		 * @param {String} name cookieåç§°ã€å¿…é€‰ã€‘
-		 * @param {Boolean} encode æ˜¯å¦encodeURIComponent é»˜è®¤falseã€å¯é€‰ã€‘
-		 * @return æŒ‡å®šcookieçš„å€¼
+		 * @param {String} name cookieÃû³Æ¡¾±ØÑ¡¡¿
+		 * @param {Boolean} encode ÊÇ·ñencodeURIComponent Ä¬ÈÏfalse¡¾¿ÉÑ¡¡¿
+		 * @return Ö¸¶¨cookieµÄÖµ
 		 */
 		get : function (name, encode) {
 			var m = document.cookie.match(new RegExp("(^| )" + name + "=([^;])*", "gi")),
@@ -225,9 +225,9 @@
 			return (!!encode ? v : decodeURIComponent(v));
 		}
 	};
-	//è¾…åŠ©ç›¸å…³
+	//¸¨ÖúÏà¹Ø
 	var help={
-		is_web:location.protocol=="chrome-extension:"?false:true,//æ˜¯å¦ä¸ºwebç«¯ï¼Œfalseä¸ºæ‰©å±•åº”ç”¨
+		is_web:location.protocol=="chrome-extension:"?false:true,//ÊÇ·ñÎªweb¶Ë£¬falseÎªÀ©Õ¹Ó¦ÓÃ
 	}
 	return {
 		string : string,

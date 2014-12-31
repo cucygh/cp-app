@@ -1,4 +1,4 @@
-﻿define(['backbone', 'zepto', 'math', 'handlebars', 'lottery', 'underscore', 'timer', 'v-user','m-ssq'], function (B, $, math, handlebar, Lot, _, Timer, User,mSsq) {
+﻿define(['backbone', 'zepto', 'math', 'handlebars', 'lottery', 'underscore', 'timer', 'v-user', 'm-ssq'], function (B, $, math, handlebar, Lot, _, Timer, User, mSsq) {
 	var View_ssq = B.View.extend({
 			el : '#wrap',
 			initialize : function () {
@@ -16,7 +16,7 @@
 				});
 				var user = new User();
 			},
-			model:new mSsq(),
+			model : new mSsq(),
 			events : {
 				'click .random-ball' : 'fun_dropdown',
 				'click .ui.dropdown .button' : 'fun_dropdown_button',
@@ -84,9 +84,9 @@
 				$wrap.find('.ball.blue').each(function (index, item) {
 					blue_ball.push($(item).text())
 				});
-				var code=red_ball.join(' ') + '+' + blue_ball.join(' ');
+				var code = red_ball.join(' ') + '+' + blue_ball.join(' ');
 				var tpl = $('#bet-item').html();
-				var item = this.model.add_code(code,tpl);
+				var item = this.model.add_code(code, tpl);
 				$('#bet-list').append(item);
 				this.fun_rm_bet(); //清空号码
 			}, //清空选号
@@ -96,21 +96,22 @@
 				$wrap.find('.ball').removeClass('red blue');
 				this.count();
 			}, //机选几注
-			fun_random_zhu:function(e){
-				e&&e.preventDefault();
-				var $self=$(e.target);
-				var num=$self.attr('num');
+			fun_random_zhu : function (e) {
+				e && e.preventDefault();
+				var $self = $(e.target);
+				var num = $self.attr('num');
 				var tpl = $('#bet-item').html();
-				var codes=this.model.random(num);
-				var code,items=[];
-				while(code=codes.pop()){
-					items.push(this.model.add_code(code,tpl));
+				var codes = this.model.random(num);
+				var code,
+				items = [];
+				while (code = codes.pop()) {
+					items.push(this.model.add_code(code, tpl));
 				}
 				$('#bet-list').append(items.join(''));
 			},
 			// 清空投注列表
-			fun_clear_all:function(e){
-				e&&e.preventDefault();
+			fun_clear_all : function (e) {
+				e && e.preventDefault();
 				$('#bet-list').html('');
 			},
 			//立即投注

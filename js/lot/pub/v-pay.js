@@ -59,12 +59,17 @@ define(['zepto', 'backbone', 'm-pay', 'lottery', 'pay-tpl'], function ($, B, mPa
 			},
 			fun_pay : function () {
 				var order = this.get_order().xValue;
+				var type={
+					'1':'代购',
+					'2':'合买',
+					'3':'追号'
+				};
 				var param = {
-					chan : 1, //消费类型1现金 2红包 3组合支付
+					chan : order.URL.match(/\d$/g)[0], //消费类型1现金 2红包 3组合支付
 					from : '2',
 					orderamt : order.TradeMoney,
 					orderid : order.OrderID,
-					ordername : '双色球 第2014153期 代购',
+					ordername : [order.LotName,'第'+order.DrawNo+'期',type[order.TypeID]].join(' '),
 					ordertime : order.OrderTime,
 					paypass : this.model.pwd_md5($('#pay_pwd').val()),
 					paytype : order.TypeID,
